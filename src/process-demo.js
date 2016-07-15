@@ -41,7 +41,15 @@ module.exports = (markdownData) => {
   });
   const codeIndex = contentChildren.findIndex((node) => {
     return JsonML.getTagName(node) === 'pre' &&
-      JsonML.getAttributes(node).lang === 'jsx';
+      JsonML.getAttributes(node).lang === 'vue';
+  });
+  const vueTemplateIndex = contentChildren.findIndex((node) => {
+    return JsonML.getTagName(node) === 'pre' &&
+      JsonML.getAttributes(node).lang === 'vue-template';
+  });
+  const vueScriptIndex = contentChildren.findIndex((node) => {
+    return JsonML.getTagName(node) === 'pre' &&
+      JsonML.getAttributes(node).lang === 'vue-script';
   });
   if (chineseIntroStart > -1 /* equal to englishIntroStart > -1 */) {
     markdownData.content = {
@@ -62,7 +70,10 @@ module.exports = (markdownData) => {
     getCode(contentChildren[codeIndex])
       .replace(`${pkgName}/lib`, componentsPath),
   ]);
-  markdownData.preview = preview;
+  markdownData.preview = getCode(contentChildren[codeIndex]);
+  markdownData.vueTemplate = getCode(contentChildren[vueTemplateIndex]);
+  markdownData.vueScript = getCode(contentChildren[vueScriptIndex]);
+
 
   const styleNode = contentChildren.filter((node) => {
     return isStyleTag(node) ||
@@ -81,7 +92,9 @@ module.exports = (markdownData) => {
     const html = nunjucks.renderString(tmpl, {
       id: meta.id,
       style: markdownData.style,
-      script: babel.transform(getCode(markdownData.preview), babelrc).code,
+      template: markdownData.vueTemplate,
+      script: markdownData.vueScript
+      //script: babel.transform(getCode(markdownData.preview), babelrc).code,
     });
     const fileName = `demo-${Math.random()}.html`;
     fs.writeFile(path.join(process.cwd(), '_site', fileName), html);
