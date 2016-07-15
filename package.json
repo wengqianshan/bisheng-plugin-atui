@@ -1,0 +1,61 @@
+{
+  "name": "bisheng-plugin-atui",
+  "version": "0.1.0",
+  "description": "bisheng plugin for atui",
+  "scripts": {
+    "lint": "eslint ./src",
+    "eslint-fix": "eslint --fix ./src",
+    "babel": "babel ./src --out-dir ./lib",
+    "pub": "npm run babel && cp ./src/template.html ./lib && npm publish && rm -rf lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoshan5733/bisheng-plugin-atui.git"
+  },
+  "keywords": [
+    "bisheng",
+    "plugin",
+    "atui",
+  ],
+  "author": "Benjy Cui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaoshan5733/bisheng-plugin-atui/issues"
+  },
+  "homepage": "https://github.com/xiaoshan5733/bisheng-plugin-atui#readme",
+  "dependencies": {
+    "antd": "^1.5.0",
+    "babel-core": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "classnames": "^2.2.5",
+    "jsonml.js": "^0.1.0",
+    "nunjucks": "^2.4.2",
+    "react-sublime-video": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^2.13.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-router": "^2.0.0",
+    "jsonml-to-react-component": "^0.2.0"
+  }
+}
