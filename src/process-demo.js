@@ -21,6 +21,9 @@ function isStyleTag(node) {
 }
 
 function getCode(node) {
+  if (!node) {
+    return;
+  }
   return JsonML.getChildren(
     JsonML.getChildren(node)[0]
   )[0];
@@ -41,8 +44,9 @@ module.exports = (markdownData) => {
   });
   const codeIndex = contentChildren.findIndex((node) => {
     return JsonML.getTagName(node) === 'pre' &&
-      JsonML.getAttributes(node).lang === 'vue';
+      JsonML.getAttributes(node).lang === 'jsx';
   });
+
   const vueTemplateIndex = contentChildren.findIndex((node) => {
     return JsonML.getTagName(node) === 'pre' &&
       JsonML.getAttributes(node).lang === 'vue-template';
