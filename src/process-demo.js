@@ -92,6 +92,7 @@ module.exports = (markdownData) => {
     const html = nunjucks.renderString(tmpl, {
       id: meta.id,
       style: markdownData.style,
+      preview: markdownData.preview,
       template: markdownData.vueTemplate,
       script: markdownData.vueScript
       //script: babel.transform(getCode(markdownData.preview), babelrc).code,
